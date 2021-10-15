@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+    Open Tasks
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped" id="closed_table">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th onclick="sortTable(1)" class="sort">Team</th>
+                <th>Room Number</th>
+                <th>Room Location</th>
+                <th>Detail</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+       <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{task.time}}</td>
+                <td>{{task.team}}</td>
+                <td>{{task.room_number}}</td>
+                <td>{{task.room_location}}</td>
+                <td>{{task.detail}}</td>
+                <td>{{task.status}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <script>
+            function sortTable(n) {
+              var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+              table = document.getElementById("closed_table");
+              switching = true;
+              dir = "asc";
+              while (switching) {
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                  shouldSwitch = false;
+                  x = rows[i].getElementsByTagName("TD")[n];
+                  y = rows[i + 1].getElementsByTagName("TD")[n];
+                  if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                      shouldSwitch = true;
+                      break;
+                    }
+                  } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                      shouldSwitch = true;
+                      break;
+                    }
+                  }
+                }
+                if (shouldSwitch) {
+                  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                  switching = true;
+                  switchcount ++;
+                } else {
+                  if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                  }
+                }
+              }
+            }
+            </script>
+    </table>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Reports
+{% endblock %}
+
+{% block main %}
+<form action="/report" method="post">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Team</th>
+                <th>From Date</th>
+                <th>To Date</th>
+            </tr>
+            <tr>
+                <td>
+                    <select name="team" class="form-control">
+                        <option disabled selected value>Team</option>
+                        <option value="maintenance">Maintenance</option>
+                        <option value="housekeeping">Housekeeping</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="date" name="date_from" class="form-control">
+                </td>
+                <td>
+                    <input type="date" name="date_to" class="form-control">
+                </td>            
+            </tr>
+        </thead>
+    </table>
+    <button class="btn btn-primary" type="submit">Create Report</button>
+</form>
+{% endblock %}

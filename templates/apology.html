@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Apology
+{% endblock %}
+
+{% block main %}
+    <img alt="{{ top }}" class="border" src="http://memegen.link/custom/{{ top | urlencode }}/{{ bottom | urlencode }}.jpg?alt=https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/TAR_Exclamation_icon.svg/1200px-TAR_Exclamation_icon.svg.png" title="{{ top }}">
+{% endblock %}

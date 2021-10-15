@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+    Open Tasks
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped" id="report_table">
+        <thead>
+            <script>
+            // provided by www.w3schools.com/howto/howto_js_sort_table.asp
+                function sortTable(n) {
+                  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                  table = document.getElementById("report_table");
+                  switching = true;
+                  dir = "asc";
+                  while (switching) {
+                    switching = false;
+                    rows = table.rows;
+
+                    for (i = 1; i < (rows.length - 1); i++) {
+                      shouldSwitch = false;
+                      x = rows[i].getElementsByTagName("TD")[n];
+                      y = rows[i + 1].getElementsByTagName("TD")[n];
+                      if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                          shouldSwitch = true;
+                          break;
+                        }
+                      } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                          shouldSwitch = true;
+                          break;
+                        }
+                      }
+                    }
+                    if (shouldSwitch) {
+                      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                      switching = true;
+                      switchcount ++;
+                    } else {
+                      if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                      }
+                    }
+                  }
+                }
+                </script>
+            <tr>
+                <th onclick="sortTable(0)">Id</th>
+                <th onclick="sortTable(1)">Time</th>
+                <th onclick="sortTable(2)">User id</th>
+                <th onclick="sortTable(3)">Team</th>
+                <th onclick="sortTable(4)">Room Number</th>
+                <th>Room's Location</th>
+                <th>Detail</th>
+                <th onclick="sortTable(7)">Status</th>
+            </tr>
+        </thead>
+       <tbody>
+            {% for report in reports %}
+            <tr>
+                <td>{{report.id}}</td>
+                <td>{{report.time}}</td>
+                <td>{{report.user_id}}</td>
+                <td>{{report.team}}</td>
+                <td>{{report.room_number}}</td>
+                <td>{{report.room_location}}</td>
+                <td>{{report.detail}}</td>
+                <td>{{report.status}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    New Task
+{% endblock %}
+
+{% block main %}
+    <form action="/new_task" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="room_number" placeholder="Room Number" type="number">
+        </div>
+        <div class="form-group">
+            <select name="room_location" class="form-control">
+                <option disabled selected value>Room's Location</option>
+                <option value="Bedroom">Bedroom</option>
+                <option value="Balcony">Balcony</option>
+                <option value="Bathroom">Bathroom</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select name="team" class="form-control">
+                <option disabled selected value>Team</option>
+                <option value="maintenance">Maintenance</option>
+                <option value="housekeeping">Housekeeping</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="detail" placeholder="Details" type="text" maxlength="40">
+        </div>
+        <button class="btn btn-primary" type="submit">Create Task</button>
+    </form>
+{% endblock %}
